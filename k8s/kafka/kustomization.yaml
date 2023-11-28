@@ -1,3 +1,20 @@
 namespace: kafka
 resources:
-  - cluster.yaml
+  - kafka.yaml
+  - kafka-connect.yaml
+helmCharts:
+- name: akhq
+  namespace: kafka
+  releaseName: akhq
+  repo: https://akhq.io/
+  valuesInline:
+    secrets:
+      akhq:
+        connections:
+          cluster-plain-test:
+            connect:
+            - name: kafka-connect
+              url: http://my-connect-cluster-connect-api:8083
+            properties:
+              bootstrap.servers: my-cluster-kafka-bootstrap:9092
+  version: 0.24.0

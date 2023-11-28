@@ -9,6 +9,8 @@ k8s_yaml(kustomize_enable_helm('k8s/strimzi'))
 
 namespace_create('kafka')
 k8s_yaml(kustomize_enable_helm('k8s/kafka'))
+k8s_kind('KafkaConnect$', image_json_path='{.spec.image}')
+docker_build('kafka-connect', 'docker/kafka-connect')
 
 namespace_create('postgres-operator')
 k8s_yaml(kustomize_enable_helm('k8s/postgres-operator'))
