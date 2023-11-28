@@ -1,0 +1,20 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaConnector
+metadata:
+  name: debezium-source
+  labels:
+    strimzi.io/cluster: my-connect-cluster
+spec:
+  class: io.debezium.connector.postgresql.PostgresConnector
+  tasksMax: 1
+  config:
+    database.hostname: acid-minimal-cluster.postgres
+    database.port: 5432
+    database.user: ${secrets:postgres/postgres.acid-minimal-cluster.credentials.postgresql.acid.zalan.do:username}
+    database.password: ${secrets:postgres/postgres.acid-minimal-cluster.credentials.postgresql.acid.zalan.do:password}
+    database.dbname: foo
+    database.server.name: foo
+    # schema.include.list: public
+    topic.prefix: foo
+    plugin.name: pgoutput
+    # snapshot.mode: initial

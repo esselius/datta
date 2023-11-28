@@ -1,0 +1,5 @@
+namespace: kafka
+resources:
+  - datagen-source.yaml
+  - jdbc-sink.yaml
+  - debezium-source.yaml

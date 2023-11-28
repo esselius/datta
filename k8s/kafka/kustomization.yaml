@@ -2,6 +2,7 @@ namespace: kafka
 resources:
   - kafka.yaml
   - kafka-connect.yaml
+  - akhq-networkpolicy.yaml
 helmCharts:
 - name: akhq
   namespace: kafka

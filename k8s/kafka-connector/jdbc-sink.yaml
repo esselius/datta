@@ -1,0 +1,16 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaConnector
+metadata:
+  name: jdbc-sink
+  labels:
+    strimzi.io/cluster: my-connect-cluster
+spec:
+  class: io.confluent.connect.jdbc.JdbcSinkConnector
+  tasksMax: 1
+  config:
+    topics: pageviews
+    auto.create: true
+    auto.evolve: true
+    connection.url: jdbc:postgresql://acid-minimal-cluster.postgres:5432/foo
+    connection.user: ${secrets:postgres/postgres.acid-minimal-cluster.credentials.postgresql.acid.zalan.do:username}
+    connection.password: ${secrets:postgres/postgres.acid-minimal-cluster.credentials.postgresql.acid.zalan.do:password}

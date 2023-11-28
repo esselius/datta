@@ -1,0 +1,15 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaConnector
+metadata:
+  name: datagen-pageviews
+  labels:
+    strimzi.io/cluster: my-connect-cluster
+spec:
+  class: io.confluent.kafka.connect.datagen.DatagenConnector
+  tasksMax: 1
+  config:
+    # key.converter: org.apache.kafka.connect.storage.StringConverter
+    kafka.topic: pageviews
+    quickstart: pageviews
+    max.interval: 5000
+    iterations: 10000

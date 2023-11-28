@@ -18,3 +18,5 @@ spec:
     bar: {}
   postgresql:
     version: "15"
+    parameters:
+      wal_level: logical
