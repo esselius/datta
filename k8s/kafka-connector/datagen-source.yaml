@@ -1,14 +1,14 @@
 apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaConnector
 metadata:
-  name: datagen-pageviews
+  name: datagen-transactions
   labels:
     strimzi.io/cluster: my-connect-cluster
 spec:
   class: io.confluent.kafka.connect.datagen.DatagenConnector
   tasksMax: 1
   config:
-    kafka.topic: pageviews
-    quickstart: pageviews
+    kafka.topic: transactions
+    quickstart: transactions
     max.interval: 5000
     iterations: 100000

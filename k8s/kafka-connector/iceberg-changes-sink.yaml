@@ -1,7 +1,7 @@
 apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaConnector
 metadata:
-  name: iceberg-sink
+  name: iceberg-changes-sink
   labels:
     strimzi.io/cluster: my-connect-cluster
 spec:
@@ -23,8 +23,5 @@ spec:
     iceberg.tables.route-field: _cdc.target
     topics.regex: foo.public.*
     transforms: dbz
-    transforms.dbz.cdc.target.pattern: default.{table}
+    transforms.dbz.cdc.target.pattern: default.{table}_changes
     transforms.dbz.type: io.tabular.iceberg.connect.transforms.DebeziumTransform
-    iceberg.tables.cdc-field: _cdc.op
-    # iceberg.tables.upsert-mode-enabled: true
-    iceberg.tables.default-id-columns: _cdc.key

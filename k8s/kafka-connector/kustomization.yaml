@@ -4,3 +4,4 @@ resources:
   - jdbc-sink.yaml
   - debezium-source.yaml
   - iceberg-sink.yaml
+  - iceberg-changes-sink.yaml

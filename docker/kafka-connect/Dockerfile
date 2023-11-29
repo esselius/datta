@@ -10,7 +10,7 @@ RUN confluent-hub install --no-prompt --component-dir /build/confluent-hub-compo
 
 FROM quay.io/strimzi/kafka:0.38.0-kafka-3.6.0
 
-ARG ICEBERG_CONNECTOR_VERSION=0.6.2
+ARG ICEBERG_CONNECTOR_VERSION=0.6.5
 
 USER root:root
 

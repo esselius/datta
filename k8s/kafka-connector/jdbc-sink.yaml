@@ -8,9 +8,11 @@ spec:
   class: io.confluent.connect.jdbc.JdbcSinkConnector
   tasksMax: 1
   config:
-    topics: pageviews
+    topics: transactions
     auto.create: true
     auto.evolve: true
     connection.url: jdbc:postgresql://acid-minimal-cluster.postgres:5432/foo
     connection.user: ${secrets:postgres/postgres.acid-minimal-cluster.credentials.postgresql.acid.zalan.do:username}
     connection.password: ${secrets:postgres/postgres.acid-minimal-cluster.credentials.postgresql.acid.zalan.do:password}
+    pk.mode: record_value
+    pk.fields: transaction_id
