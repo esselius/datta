@@ -19,3 +19,12 @@ namespace_create('postgres')
 k8s_yaml(kustomize('k8s/postgres'))
 
 k8s_yaml(kustomize('k8s/kafka-connector'))
+
+namespace_create('minio-operator')
+k8s_yaml(kustomize_enable_helm('k8s/minio-operator'))
+
+namespace_create('minio')
+k8s_yaml(kustomize('k8s/minio'))
+
+namespace_create('hive')
+k8s_yaml(kustomize_enable_helm('k8s/hive'))

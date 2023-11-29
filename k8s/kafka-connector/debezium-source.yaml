@@ -14,7 +14,5 @@ spec:
     database.password: ${secrets:postgres/postgres.acid-minimal-cluster.credentials.postgresql.acid.zalan.do:password}
     database.dbname: foo
     database.server.name: foo
-    # schema.include.list: public
     topic.prefix: foo
     plugin.name: pgoutput
-    # snapshot.mode: initial

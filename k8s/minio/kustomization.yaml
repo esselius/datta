@@ -1,0 +1,12 @@
+namespace: minio
+
+resources:
+- tenant.yaml
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+secretGenerator:
+- name: minio-config
+  files:
+  - config.env

@@ -1,0 +1,30 @@
+apiVersion: minio.min.io/v2
+kind: Tenant
+metadata:
+  name: minio
+spec:
+  requestAutoCert: false
+
+  pools:
+  - servers: 1
+    volumesPerServer: 4
+    volumeClaimTemplate:
+      metadata:
+        name: data
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 10Gi
+        storageClassName: local-path
+    resources:
+      requests:
+        cpu: 50m
+        memory: 256Mi
+
+  configuration:
+    name: minio-config
+
+  buckets:
+  - name: datalake

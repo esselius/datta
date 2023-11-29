@@ -1,0 +1,97 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: hive
+helmCharts:
+- name: postgresql
+  namespace: hive
+  releaseName: hive-metastore-postgres
+  repo: https://raw.githubusercontent.com/bitnami/charts/archive-full-index/bitnami
+  valuesInline:
+    image:
+      tag: 11.21.0-debian-11-r58
+    postgresqlDatabase: hive-metastore
+    postgresqlPassword: hive-metastore
+    postgresqlUsername: hive-metastore
+    resources:
+      requests:
+        cpu: 100m
+        memory: 64Mi
+  version: 10.16.2
+- name: hive-metastore
+  namespace: hive
+  releaseName: hive-metastore
+  repo: https://slamdev.github.io/helm-charts
+  valuesInline:
+    env:
+    - name: DB_PASS
+      valueFrom:
+        secretKeyRef:
+          key: postgresql-password
+          name: hive-metastore-postgres-postgresql
+    - name: MINIO_ACCESS_KEY
+      value: minio
+    - name: MINIO_SECRET_KEY
+      value: minio123
+    - name: MINIO_URL
+      value: http://minio.minio.svc.cluster.local:80
+    hiveSiteXml: |
+      <configuration>
+        <property>
+          <name>javax.jdo.option.ConnectionURL</name>
+          <value>jdbc:postgresql://hive-metastore-postgres-postgresql/hive-metastore</value>
+        </property>
+        <property>
+          <name>javax.jdo.option.ConnectionDriverName</name>
+          <value>org.postgresql.Driver</value>
+        </property>
+        <property>
+          <name>javax.jdo.option.ConnectionUserName</name>
+          <value>hive-metastore</value>
+        </property>
+        <property>
+          <name> javax.jdo.option.ConnectionPassword</name>
+          <value>${env:DB_PASS}</value>
+        </property>
+        <property>
+          <name>datanucleus.autoCreateSchema</name>
+          <value>false</value>
+        </property>
+        <property>
+          <name>fs.s3a.impl</name>
+          <value>org.apache.hadoop.fs.s3a.S3AFileSystem</value>
+        </property>
+        <property>
+          <name>fs.s3a.access.key</name>
+          <value>${env:MINIO_ACCESS_KEY}</value>
+        </property>
+        <property>
+          <name>fs.s3a.secret.key</name>
+          <value>${env:MINIO_SECRET_KEY}</value>
+        </property>
+        <property>
+          <name>fs.s3a.endpoint</name>
+          <value>${env:MINIO_URL}</value>
+        </property>
+        <property>
+          <name>fs.s3a.path.style.access</name>
+          <value>true</value>
+        </property>
+        <property>
+          <name>hive.metastore.warehouse.dir</name>
+          <value>s3a://datalake/warehouse</value>
+        </property>
+      </configuration>
+    # image:
+    #   repository: eu.gcr.io/pagero-build/owl-hive-metastore
+    #   tag: latest
+    importJars:
+      coords:
+      - org.apache.hadoop:hadoop-aws:2.10.1
+      enabled: true
+    resources:
+      requests:
+        cpu: 0.1
+        memory: 384Mi
+    schematool:
+      enabled: true
+  version: 0.0.5

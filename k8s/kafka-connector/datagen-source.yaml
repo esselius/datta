@@ -8,7 +8,6 @@ spec:
   class: io.confluent.kafka.connect.datagen.DatagenConnector
   tasksMax: 1
   config:
-    # key.converter: org.apache.kafka.connect.storage.StringConverter
     kafka.topic: pageviews
     quickstart: pageviews
     max.interval: 5000

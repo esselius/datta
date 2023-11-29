@@ -3,3 +3,4 @@ resources:
   - datagen-source.yaml
   - jdbc-sink.yaml
   - debezium-source.yaml
+  - iceberg-sink.yaml

@@ -1,0 +1,26 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: minio-operator
+helmCharts:
+- includeCRDs: true
+  name: operator
+  namespace: minio-operator
+  releaseName: minio-operator
+  repo: https://operator.min.io
+  valuesInline:
+    console:
+      resources:
+        requests:
+          cpu: 100m
+          memory: 128Mi
+    operator:
+      env:
+      - name: WATCHED_NAMESPACE
+        value: minio
+      replicaCount: 1
+      resources:
+        requests:
+          cpu: 100m
+          ephemeral-storage: 500Mi
+          memory: 128Mi
+  version: 5.0.9
