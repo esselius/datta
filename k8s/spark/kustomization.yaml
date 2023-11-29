@@ -1,0 +1,5 @@
+namespace: spark
+
+resources:
+  - spark-py-pi.yaml
+  - rbac.yaml

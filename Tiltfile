@@ -28,3 +28,11 @@ k8s_yaml(kustomize('k8s/minio'))
 
 namespace_create('hive')
 k8s_yaml(kustomize_enable_helm('k8s/hive'))
+
+namespace_create('spark-operator')
+k8s_yaml(kustomize_enable_helm('k8s/spark-operator'))
+
+namespace_create('spark')
+k8s_yaml(kustomize('k8s/spark'))
+k8s_kind('SparkApplication', image_json_path='{.spec.image}')
+docker_build('spark-job', 'docker/spark-job')

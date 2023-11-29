@@ -28,3 +28,6 @@ spec:
 
   buckets:
   - name: datalake
+
+  features:
+    bucketDNS: false
