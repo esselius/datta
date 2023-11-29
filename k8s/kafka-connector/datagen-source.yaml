@@ -11,4 +11,4 @@ spec:
     kafka.topic: pageviews
     quickstart: pageviews
     max.interval: 5000
-    iterations: 10000
+    iterations: 100000

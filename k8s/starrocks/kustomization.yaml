@@ -1,0 +1,4 @@
+namespace: starrocks
+
+resources:
+- cluster.yaml

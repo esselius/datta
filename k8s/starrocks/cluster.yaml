@@ -1,0 +1,17 @@
+apiVersion: starrocks.com/v1
+kind: StarRocksCluster
+metadata:
+  name: starrocks
+spec:
+  starRocksFeSpec:
+    image: starrocks/fe-ubuntu:latest
+    replicas: 1
+    requests:
+      cpu: 1
+      memory: 2Gi
+  starRocksBeSpec:
+    image: starrocks/be-ubuntu:latest
+    replicas: 1
+    requests:
+      cpu: 1
+      memory: 2Gi

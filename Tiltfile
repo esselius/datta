@@ -36,3 +36,9 @@ namespace_create('spark')
 k8s_yaml(kustomize('k8s/spark'))
 k8s_kind('SparkApplication', image_json_path='{.spec.image}')
 docker_build('spark-job', 'docker/spark-job')
+
+namespace_create('starrocks-operator')
+k8s_yaml(kustomize('k8s/starrocks-operator'))
+
+namespace_create('starrocks')
+k8s_yaml(kustomize('k8s/starrocks'))

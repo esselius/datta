@@ -1,0 +1,15 @@
+namespace: starrocks-operator
+
+resources:
+- https://raw.githubusercontent.com/StarRocks/starrocks-kubernetes-operator/main/deploy/starrocks.com_starrocksclusters.yaml
+- https://raw.githubusercontent.com/StarRocks/starrocks-kubernetes-operator/main/deploy/operator.yaml
+
+patches:
+  - target:
+      kind: Namespace
+    patch: |
+      $patch: delete
+      apiVersion: v1
+      kind: Namespace
+      metadata:
+        name: DOES NOT MATTER
