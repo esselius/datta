@@ -1,7 +1,9 @@
 namespace: kafka
 resources:
-  - datagen-source.yaml
-  - jdbc-sink.yaml
+  - datagen-payroll-employee-source.yaml
+  - datagen-transactions-source.yaml
+  - jdbc-payroll-employee-sink.yaml
+  - jdbc-transactions-sink.yaml
   - debezium-source.yaml
   - iceberg-sink.yaml
   - iceberg-changes-sink.yaml

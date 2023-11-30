@@ -1,4 +1,15 @@
 namespace: starrocks
 
+configurations:
+- kustomize-configmaps.yaml
+
 resources:
 - cluster.yaml
+
+configMapGenerator:
+- name: be-config
+  files:
+  - be.conf
+- name: fe-config
+  files:
+  - fe.conf

@@ -42,3 +42,6 @@ k8s_yaml(kustomize('k8s/starrocks-operator'))
 
 namespace_create('starrocks')
 k8s_yaml(kustomize('k8s/starrocks'))
+
+namespace_create('telepresence')
+k8s_yaml(kustomize_enable_helm('k8s/telepresence'))

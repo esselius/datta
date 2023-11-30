@@ -1,0 +1,14 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaConnector
+metadata:
+  name: datagen-payroll-employee
+  labels:
+    strimzi.io/cluster: my-connect-cluster
+spec:
+  class: io.confluent.kafka.connect.datagen.DatagenConnector
+  tasksMax: 1
+  config:
+    kafka.topic: payroll_employee
+    quickstart: payroll_employee
+    max.interval: 500
+    iterations: 100000

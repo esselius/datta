@@ -4,14 +4,38 @@ metadata:
   name: starrocks
 spec:
   starRocksFeSpec:
-    image: starrocks/fe-ubuntu:latest
-    replicas: 1
+    image: starrocks/fe-ubuntu:3.1.5
+    replicas: 3
     requests:
       cpu: 1
       memory: 2Gi
+    configMapInfo:
+      configMapName: fe-config
+      resolveKey: fe.conf
+    storageVolumes:
+    - name: fe-storage-meta
+      # storageClassName: ""  # you can remove this line if you want to use the default storage class
+      storageSize: 10Gi   # the size of storage volume for metadata
+      mountPath: /opt/starrocks/fe/meta   # the path of metadata
+    - name: fe-storage-log
+      # storageClassName: ""  # you can remove this line if you want to use the default storage class
+      storageSize: 1Gi    # the size of storage volume for log
+      mountPath: /opt/starrocks/fe/log    # the path of log
   starRocksBeSpec:
-    image: starrocks/be-ubuntu:latest
-    replicas: 1
+    image: starrocks/be-ubuntu:3.1.5
+    replicas: 3
     requests:
       cpu: 1
       memory: 2Gi
+    configMapInfo:
+      configMapName: be-config
+      resolveKey: be.conf
+    storageVolumes:
+    - name: be-storage-data
+      # storageClassName: ""  # you can remove this line if you want to use the default storage class
+      storageSize: 10Gi   # the size of storage volume for data
+      mountPath: /opt/starrocks/be/storage  # the path of data
+    - name: be-storage-log
+      # storageClassName: ""  # you can remove this line if you want to use the default storage class
+      storageSize: 1Gi  # the size of storage volume for log
+      mountPath: /opt/starrocks/be/log  # the path of log

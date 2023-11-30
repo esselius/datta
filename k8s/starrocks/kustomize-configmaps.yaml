@@ -1,0 +1,9 @@
+nameReference:
+  - kind: 'ConfigMap'
+    fieldSpecs:
+      - kind: 'StarRocksCluster'
+        path: 'spec/starRocksFeSpec/configMapInfo/configMapName'
+  - kind: 'ConfigMap'
+    fieldSpecs:
+      - kind: 'StarRocksCluster'
+        path: 'spec/starRocksBeSpec/configMapInfo/configMapName'
