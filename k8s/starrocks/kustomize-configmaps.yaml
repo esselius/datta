@@ -7,3 +7,7 @@ nameReference:
     fieldSpecs:
       - kind: 'StarRocksCluster'
         path: 'spec/starRocksBeSpec/configMapInfo/configMapName'
+  - kind: 'ConfigMap'
+    fieldSpecs:
+      - kind: 'StarRocksCluster'
+        path: 'spec/starRocksCnSpec/configMapInfo/configMapName'

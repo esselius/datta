@@ -5,10 +5,10 @@ metadata:
 spec:
   starRocksFeSpec:
     image: starrocks/fe-ubuntu:3.1.5
-    replicas: 3
+    replicas: 1
     requests:
-      cpu: 1
-      memory: 2Gi
+      cpu: 2
+      memory: 4Gi
     configMapInfo:
       configMapName: fe-config
       resolveKey: fe.conf
@@ -21,21 +21,21 @@ spec:
       # storageClassName: ""  # you can remove this line if you want to use the default storage class
       storageSize: 1Gi    # the size of storage volume for log
       mountPath: /opt/starrocks/fe/log    # the path of log
-  starRocksBeSpec:
-    image: starrocks/be-ubuntu:3.1.5
-    replicas: 3
+  starRocksCnSpec:
+    image: starrocks/cn-ubuntu:3.1.5
+    replicas: 1
     requests:
-      cpu: 1
-      memory: 2Gi
+      cpu: 2
+      memory: 12Gi
     configMapInfo:
-      configMapName: be-config
-      resolveKey: be.conf
-    storageVolumes:
-    - name: be-storage-data
-      # storageClassName: ""  # you can remove this line if you want to use the default storage class
-      storageSize: 10Gi   # the size of storage volume for data
-      mountPath: /opt/starrocks/be/storage  # the path of data
-    - name: be-storage-log
-      # storageClassName: ""  # you can remove this line if you want to use the default storage class
-      storageSize: 1Gi  # the size of storage volume for log
-      mountPath: /opt/starrocks/be/log  # the path of log
+      configMapName: cn-config
+      resolveKey: cn.conf
+    # storageVolumes:
+    # - name: be-storage-data
+    #   # storageClassName: ""  # you can remove this line if you want to use the default storage class
+    #   storageSize: 10Gi   # the size of storage volume for data
+    #   mountPath: /opt/starrocks/be/storage  # the path of data
+    # - name: be-storage-log
+    #   # storageClassName: ""  # you can remove this line if you want to use the default storage class
+    #   storageSize: 1Gi  # the size of storage volume for log
+    #   mountPath: /opt/starrocks/be/log  # the path of log

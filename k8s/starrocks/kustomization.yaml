@@ -13,3 +13,6 @@ configMapGenerator:
 - name: fe-config
   files:
   - fe.conf
+- name: cn-config
+  files:
+  - cn.conf
